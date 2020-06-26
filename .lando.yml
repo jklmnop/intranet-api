@@ -1,0 +1,25 @@
+name: intranet-api
+recipe: lemp
+config:
+  webroot: public
+
+services:
+  appserver:
+    config:
+      vhosts: lando/nginx.conf
+      php: lando/php.ini
+      database: lando/mysql.conf
+
+  database:
+    portforward: 3312
+    creds:
+      user: intranet_api
+      password: intranet_api
+      database: api
+
+tooling:
+  console:
+    service: appserver
+    cmd: bin/console
+
+# lando composer create-project symfony/website-skeleton tmp && cp -r tmp/. . && rm -rf tmp
