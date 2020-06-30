@@ -5,3 +5,15 @@ api_platform:
         json: ['application/merge-patch+json']
     swagger:
         versions: [3]
+
+    # The title of the API.
+    title: 'LeBow Intranet API'
+
+    # The description of the API.
+    description: 'LeBow Intranet API'
+
+    # The version of the API.
+    version: '0.0.1'
+
+    # Set this to false if you want Webby to disappear.
+    show_webby: false
