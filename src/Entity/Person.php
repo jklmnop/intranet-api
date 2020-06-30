@@ -5,9 +5,15 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PersonRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *   collectionOperations={"get", "post"},
+ *   itemOperations={"get", "put"},
+ *   normalizationContext={"groups"={"person:read"}},
+ *   denormalizationContext={"groups"={"person:write"}}
+ * )
  * @ORM\Entity(repositoryClass=PersonRepository::class)
  */
 class Person
@@ -21,18 +27,21 @@ class Person
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"person:read", "person:write"})
      */
-    private $first_name;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"person:read", "person:write"})
      */
-    private $last_name;
+    private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"person:read", "person:write"})
      */
-    private $email;
+    private $userId;
 
     public function getId(): ?int
     {
@@ -41,36 +50,36 @@ class Person
 
     public function getFirstName(): ?string
     {
-        return $this->first_name;
+        return $this->firstName;
     }
 
-    public function setFirstName(string $first_name): self
+    public function setFirstName(string $firstName): self
     {
-        $this->first_name = $first_name;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
-    public function setLastName(string $last_name): self
+    public function setLastName(string $lastName): self
     {
-        $this->last_name = $last_name;
+        $this->lastName = $lastName;
 
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getUserId(): ?string
     {
-        return $this->email;
+        return $this->userId;
     }
 
-    public function setEmail(string $email): self
+    public function setUserId(string $userId): self
     {
-        $this->email = $email;
+        $this->userId = $userId;
 
         return $this;
     }
